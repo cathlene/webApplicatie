@@ -22,16 +22,36 @@
 	<main>
 	<article>
 	 <h1>Welcome</h1>
+	 
+	<c:choose>
+		<c:when test="${name==null }">
+		<form method="post" action=Controller?action=logIn>
+	<p><input type="text" id="nickName" name="nickName" value="${nickName}"></p>
+		<p><input type="text" id="password" name="password" value="${password}"></p>
+		<p><input type="submit" id="submit" value="logIn"></p>
+		</form>
+		</c:when>
+		<c:otherwise>
+		<p>dag ${name.nickName}</p>
+		
+<form  >
+        <p><input type="text" id="status" name="status"> </p>
+      <p><input class="button"type="button" id="statusbutton" value="change status" onclick="changeStatus();"></p>
+      
+</form>  
+		<form method="post" action=Controller?action=logOut>
+		<input type="submit" value="logout">
+		</form>
+		</c:otherwise>
+		</c:choose>
       
       <table id="tableFriends">
 
 </table> 
-<button onclick="showForm()">Show form</button>
-<button onclick="hideForm()">Hide form</button>
+<button class ="button1" id="friendbutton" onclick="showHideForm()">add a new friend</button>
 
-<form id="friendForm">
+<form id="friendForm" style="display:none">
         <p><label for="nickName">nickName</label><input type="text" id="nickName" name="nickName"> </p>
-        <p><label for="status">status</label><input type="text" id="status" name="status"> </p>
       <p><input class="button"type="button" id="friendbutton" value="add friend" onclick="addNewFriend();"></p>
       
 </form> 

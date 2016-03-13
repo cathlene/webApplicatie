@@ -6,26 +6,17 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-import db.PersonService;
 import domain.Person;
 
+public class ChangeStatus implements RequestHandler {
 
-public class AddFriend implements RequestHandler {
-
-
-	PersonService service;
-	
-	public AddFriend(PersonService service){
-		this.service = service;
-	}
 	@Override
 	public String handleRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String nickName=request.getParameter("nickName");
-		Person friend= service.getPerson(nickName);
-		Person user = (Person) request.getSession().getAttribute("name");
-		user.addFriend(friend);
+		
+		Person user= (Person) request.getSession().getAttribute("name");
+		user.setStatus(request.getParameter("status"));
+		System.out.println(user.getStatus());
 		return "index.jsp";
 	}
 

@@ -15,11 +15,23 @@ th,td {
 table caption {
 	display: none;
 }
-.button {
+.button1 {
     background-color: #F1592A;
     border: none;
     color: white;
-    padding: 15px 32px;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 15px 2px;
+    cursor: pointer;
+}
+.button {
+    background-color: #57C4C9;
+    border: none;
+    color: white;
+    padding: 7px 16px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -47,6 +59,19 @@ img {
     max-width: 100%; /* responsive image */
 }
 
+.alert-danger {
+    padding: 0.5em;
+    background-color: #f2dede;
+    border: 1px solid #b94a48;
+    color: #b94a48;
+    border-radius: 3px;
+    width: 100%
+    margin-bottom: 1em;
+    box-sizing: border-box;
+}
+.alert-danger ul {
+    list-style-type: none;
+}
 table {
   max-width: 100%;
   background-color: transparent;

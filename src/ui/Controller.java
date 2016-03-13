@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import actions.HandlerFactory;
 import actions.RequestHandler;
-import db.FriendService;
+import db.PersonService;
 
 /**
  * Servlet implementation class Controller
@@ -19,7 +19,7 @@ import db.FriendService;
 @WebServlet("/Controller")
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private FriendService friendService ;
+	private PersonService personService ;
 
        
     /**
@@ -27,7 +27,7 @@ public class Controller extends HttpServlet {
      */
     public Controller() {
         super();
-        friendService = new FriendService();
+        personService = new PersonService();
     }
 
 	/**
@@ -44,12 +44,23 @@ public class Controller extends HttpServlet {
 		this.proccesRequest(request, response);
 	}
 	protected void proccesRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String action = request.getParameter("action");
-		RequestHandler handler = new HandlerFactory(friendService).getHandler(action);
+		try {String action = request.getParameter("action");
+		RequestHandler handler = new HandlerFactory(personService).getHandler(action);
 		 String destination = handler.handleRequest(request, response);
-		 
-		 RequestDispatcher view = request.getRequestDispatcher(destination);
-		 view.forward(request, response);
+		 if(destination.contains(".jsp")){
+				RequestDispatcher view = request.getRequestDispatcher(destination);
+				view.forward(request, response);
+			}
+			else{
+				response.getWriter().write(destination);
+			}
+			
+		} catch (Exception ex) {
+			throw new ServletException(ex.getMessage(), ex);
+		}
+		
+		
+		
 		
 	}
 

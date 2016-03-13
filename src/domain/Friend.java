@@ -4,6 +4,8 @@ public class Friend {
 	
 	private String nickName;
 	private String status;
+	private String password;
+
 
 	public Friend(){
 		
@@ -12,6 +14,7 @@ public class Friend {
 	public Friend(String nickName, String status) {
 		this.nickName = nickName;
 		this.status = status;
+
 	}
 	public String getNickName() {
 		return nickName;
