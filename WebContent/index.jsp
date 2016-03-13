@@ -26,8 +26,8 @@
 	<c:choose>
 		<c:when test="${name==null }">
 		<form method="post" action=Controller?action=logIn>
-	<p><input type="text" id="nickName" name="nickName" value="${nickName}"></p>
-		<p><input type="text" id="password" name="password" value="${password}"></p>
+	<p> nickName:<br><input type="text" id="nickName" name="nickName" value="${nickName}"></p>
+		<p> Password:<br><input type="password" id="password" name="password" value="${password}"></p>
 		<p><input type="submit" id="submit" value="logIn"></p>
 		</form>
 		</c:when>
@@ -35,7 +35,7 @@
 		<p>dag ${name.nickName}</p>
 		
 <form  >
-        <p><input type="text" id="status" name="status"> </p>
+        <p>status:<br><input type="text" id="status" name="status"> </p>
       <p><input class="button"type="button" id="statusbutton" value="change status" onclick="changeStatus();"></p>
       
 </form>  
@@ -51,7 +51,7 @@
 <button class ="button1" id="friendbutton" onclick="showHideForm()">add a new friend</button>
 
 <form id="friendForm" style="display:none">
-        <p><label for="nickName">nickName</label><input type="text" id="nickName" name="nickName"> </p>
+        <p>NickName:<br><input type="text" id="nickName" name="nickName"> </p>
       <p><input class="button"type="button" id="friendbutton" value="add friend" onclick="addNewFriend();"></p>
       
 </form> 
