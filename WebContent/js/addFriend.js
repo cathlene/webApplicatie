@@ -13,6 +13,12 @@ function addNewFriend(){
 
 }
 
+function begin(){
+	
+	loadFriends();
+	openActorSocket();
+	openHolidaySocket();
+}
 function changeStatus(){
 	var status= document.getElementById("status").value;
 	postObject.open("POST", "Controller?action=changeStatus", true);
@@ -42,21 +48,6 @@ function createFriendTable(){
 				friends[i].status +
 				"</td><td></tr>"; 
 
-//				var nickNameText = friends[i].nickName;
-//				var nickName = document.createTextNode(nickNameText);
-//				var statusText = friends[i].status;
-//				var status = document.createTextNode(statusText);
-
-//				var nickNameId = document.createElement('td');
-//				nickNameId.appendChild(nickName);
-//				var statusId = document.createElement('td');
-//				statusId.appendChild(status);
-
-//				var friendsTr = document.createElement('tr');
-//				friendsTr.appendChild(nickNameId);
-//				friendsTr.appendChild(statusId);
-
-
 			}
 			document.getElementById("tableFriends").innerHTML = toReturn;
 			setTimeout("loadFriends()", 1000);
@@ -70,6 +61,4 @@ function showHideForm(){
 	document.getElementById("friendForm").style.display="block";
 }
 
-function hideForm(){
-}
 

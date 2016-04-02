@@ -38,14 +38,11 @@ public class Person {
 		this.password = password;
 	}
 	public void setStatus(String status) {
-		System.out.println("change");
 		if (status.isEmpty()) {
 			throw new IllegalArgumentException("No status given");
 		}
-		System.out.println(status);
 		this.status = status;
-		System.out.println(this.getNickName());
-		System.out.println(this.status);
+		
 	}
 	public void setNickName(String nickName) {
 		if (nickName.isEmpty()) {

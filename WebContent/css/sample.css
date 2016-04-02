@@ -53,12 +53,25 @@ header {
   	border-left-color: red;
   	border-right-color: orange;
   	border-bottom-color: orange;
+  	padding: 10px 10px 10px 10px;
 }
 
 img {
     max-width: 100%; /* responsive image */
 }
 
+#divs {
+	border-style: inset;
+	border-top-color: red;
+  	border-left-color: red;
+  	border-right-color: orange;
+  	border-bottom-color: orange;
+	
+}
+#container{
+	
+	height: 100%;
+}
 .alert-danger {
     padding: 0.5em;
     background-color: #f2dede;
@@ -132,7 +145,19 @@ input[type="text"] {
 input[id="votes"] {
 	width: 40%;
 }
+#actorDiv{
+	width: 46%;
+    padding: 0 0 0 10px;
+    display: inline-block;
+    vertical-align: top;
+  padding:0 0 0 10px;
+}
 
+#holidayDiv{
+	 width: 46%;
+    display: inline-block;
+    vertical-align: top;
+}
 fieldset {
 	border: 1px solid #999;
 }

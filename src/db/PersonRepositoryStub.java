@@ -15,6 +15,8 @@ public class PersonRepositoryStub implements PersonRepository {
 		persons = new HashMap<String, Person>();
 		this.addPerson(new Person("john","john","online"));
 		this.addPerson(new Person("johnny", "johnny", "offline"));
+		this.addPerson(new Person("jes", "jes", "offline"));
+
 	}
 	@Override
 	public void addPerson(Person person) {
