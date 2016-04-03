@@ -2,6 +2,7 @@ package db;
 
 import java.util.List;
 
+import domain.Message;
 import domain.Person;
 
 public class PersonService {
@@ -18,7 +19,12 @@ public class PersonService {
 	public Person getPerson(String nickName){
 		return this.getPersonRepository().getPerson(nickName);
 	}
-	
+	public void addMessage(Message message){
+		this.getPersonRepository().addMessage(message);
+	}
+	public List<Message> getMessages(){
+		return this.getPersonRepository().getMessages();
+	}
 	public void addPerson(Person person){
 		this.getPersonRepository().addPerson(person);
 		

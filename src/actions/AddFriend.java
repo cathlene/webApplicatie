@@ -22,8 +22,6 @@ public class AddFriend implements RequestHandler {
 	@Override
 	public String handleRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		System.out.println("ik kom er");
 		if (!isLoggedIn(request)) {
 			System.out.println("niet ingelogd");
 

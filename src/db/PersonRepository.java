@@ -3,6 +3,7 @@ package db;
 import java.util.List;
 
 import domain.Friend;
+import domain.Message;
 import domain.Person;
 
 public interface PersonRepository {
@@ -12,5 +13,6 @@ public interface PersonRepository {
 	void updatePerson(Person person);
 	void deletePerson(Person person);
 	List<Person> getAllPersons();
-
+	void addMessage(Message message);
+	List<Message> getMessages();
 }

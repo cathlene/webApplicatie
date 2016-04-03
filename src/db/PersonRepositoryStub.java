@@ -6,13 +6,16 @@ import java.util.List;
 import java.util.Map;
 
 import domain.Friend;
+import domain.Message;
 import domain.Person;
 
 public class PersonRepositoryStub implements PersonRepository {
 	private Map<String, Person> persons;
+	private List<Message>messages;
 
 	 public PersonRepositoryStub() {
 		persons = new HashMap<String, Person>();
+		messages= new ArrayList<Message>();
 		this.addPerson(new Person("john","john","online"));
 		this.addPerson(new Person("johnny", "johnny", "offline"));
 		this.addPerson(new Person("jes", "jes", "offline"));
@@ -29,7 +32,15 @@ public class PersonRepositoryStub implements PersonRepository {
 		}
 		persons.put(person.getNickName(), person);
 	}
-
+	
+	public void addMessage(Message message){
+		messages.add(message);
+	}
+	
+	public List<Message> getMessages() {
+		return messages;
+	}
+	
 	@Override
 	public Person getPerson(String nickName) {
 		if (nickName == null || !persons.containsKey(nickName)) {

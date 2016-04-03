@@ -42,10 +42,12 @@ function createFriendTable(){
 			var friends= serverResponse.friends;
 			var toReturn = "<tr><th>nickname</th><th>status</th></tr>";
 			for(var i in friends){
-				toReturn += "<tr><td>" +
+				toReturn += "<tr><td id=nickname>" + // dus wat is het probleem weer? :p XD haha oke hier
 				friends[i].nickName +
 				"</td><td>" +
 				friends[i].status +
+				"</td><td>"+
+				"<button onclick=showMessage();>Stuur bericht</button>" +
 				"</td><td></tr>"; 
 
 			}
@@ -54,6 +56,11 @@ function createFriendTable(){
 		}}
 
 
+}
+
+function showMessage(){
+
+	document.getElementById("wrapper").style.display="inline-block";
 }
 
 function showHideForm(){

@@ -10,9 +10,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="css/sample.css">
 
+<script type="text/javascript" src="js/jquery-1.12.2.min.js"></script>
 <script type="text/javascript" src="js/addFriend.js"></script>
 <script type="text/javascript" src="js/actor.js"></script>
 <script type="text/javascript" src="js/holiday.js"></script>
+<script type="text/javascript" src="js/chat.js"></script>
+
 
 <title>Insert title here</title>
 </head>
@@ -35,32 +38,48 @@
 						value="${password}">
 				</p>
 				<p>
-					<input type="submit" id="submit" value="logIn">
+					<input class="button" type="submit" id="statusbutton" value="logIn">
 				</p>
 			</form>
 		</c:when>
 		<c:otherwise>
-			<p>dag ${name.nickName}</p>
+			<p>Hallo ${name.nickName}</p>
 
 			<form>
 				<p>
 					status: <input type="text" id="status" name="status">
-				</p>
-				<p>
+				
 					<input class="button" type="button" id="statusbutton"
 						value="change status" onclick="changeStatus();">
 				</p>
 
 			</form>
 			<form method="post" action=Controller?action=logOut>
-				<input type="submit" value="logout">
+				<input class="button" type="submit" id="statusbutton" value="logout">
 			</form>
+		
+		<div id="divsloggedIn"><div id="table"><a>My friends:</a>	<table id="tableFriends"></table></div>
+		
+		<div id="wrapper" style="display: none">
+    <div id="menu">
+        <p class="welcome">Welcome <b></b></p>
+        <div style="clear:both"></div>
+    </div>
+     
+    <div id="chatbox"></div>
+     
+    <form name="message" id="message"> 
+        <input name="usermsg" type="text" id="usermsg" size="50" />
+        <input name="submitmsg" type="submit"  id="submitmsg" value="Send" />
+    </form>
+</div>
+		</div>
+		
+		
 		</c:otherwise>
 	</c:choose>
 
-	<table id="tableFriends">
-
-	</table>
+	
 	<button class="button1" id="friendbutton" onclick="showHideForm()">add
 		a new friend</button>
 

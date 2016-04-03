@@ -6,6 +6,7 @@ import java.util.List;
 public class Person {
 	
 	private transient List<Person> friends;
+	private List<Message>messages;
 	private String nickName;
 	private String password;
 	private String status;
@@ -18,6 +19,7 @@ public class Person {
 		this.setPassword(password);
 		this.setStatus(status);
 		friends= new ArrayList<Person>();
+		messages= new ArrayList<Message>();
 		
 	}
 
@@ -55,8 +57,15 @@ public class Person {
 		person.getFriends().add(this);
 	}
 	
+	public void addMessage(Message message){
+		this.messages.add(message);
+	}
+	
 	public List<Person> getFriends() {
 		return friends;
 	}
 	
+	public List<Message> getMessages() {
+		return messages;
+	}
 }
