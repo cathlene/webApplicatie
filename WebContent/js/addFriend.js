@@ -1,3 +1,4 @@
+
 var getObject = new XMLHttpRequest();
 var postObject = new XMLHttpRequest();
 var OK = 200;
@@ -13,12 +14,6 @@ function addNewFriend(){
 
 }
 
-function begin(){
-	
-	loadFriends();
-	openActorSocket();
-	openHolidaySocket();
-}
 function changeStatus(){
 	var status= document.getElementById("status").value;
 	postObject.open("POST", "Controller?action=changeStatus", true);
@@ -27,7 +22,6 @@ function changeStatus(){
 
 }
 function loadFriends(){
-
 	getObject.open("GET","Controller?action=overviewFriends",true);
 	getObject.onreadystatechange=createFriendTable;
 	getObject.send();
@@ -42,25 +36,29 @@ function createFriendTable(){
 			var friends= serverResponse.friends;
 			var toReturn = "<tr><th>nickname</th><th>status</th></tr>";
 			for(var i in friends){
-				toReturn += "<tr><td id=nickname>" + // dus wat is het probleem weer? :p XD haha oke hier
+				toReturn += "<tr><td id="+friends[i].nickName+">"+ 
 				friends[i].nickName +
 				"</td><td>" +
 				friends[i].status +
 				"</td><td>"+
-				"<button onclick=showMessage();>Stuur bericht</button>" +
+				"<button  id="+friends[i].nickName+" onclick=showMessage(event)>messages</button>" +
 				"</td><td></tr>"; 
 
 			}
-			document.getElementById("tableFriends").innerHTML = toReturn;
-			setTimeout("loadFriends()", 1000);
+			var tableFriends = document.getElementById("tableFriends");
+			if (tableFriends)
+				tableFriends.innerHTML = toReturn;
+			setTimeout("loadFriends()", 10000);
 		}}
 
 
 }
 
-function showMessage(){
-
+function showMessage(event){
+	var idhouder=event.target.id;
 	document.getElementById("wrapper").style.display="inline-block";
+	window.idhouder= idhouder;
+	start();
 }
 
 function showHideForm(){

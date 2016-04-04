@@ -1,5 +1,6 @@
 package actions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +22,7 @@ public class FriendsOverview implements RequestHandler {
 	@Override
 	public String handleRequest(HttpServletRequest request, HttpServletResponse response){
 		Gson gson= new Gson();
-		List<Person>friends = null;
+		List<Person>friends = new ArrayList<>();
 		try{
 		 Person user =  (Person) request.getSession().getAttribute("name");
 			friends= user.getFriends();

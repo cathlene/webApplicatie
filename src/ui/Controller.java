@@ -52,16 +52,16 @@ public class Controller extends HttpServlet {
 	protected void proccesRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			String action = request.getParameter("action"); // Parameter bestaat ni wss :p jawel jawel ik gebruikte da daarvoor al
-			if (action == null) return; // gvd :p 
+			if (action == null) return; 
 			if("message".equals(action)){ 
 				messageStuff(request,response); 
-				return; // werkt da zo? ik denk wel da da gaat
+			
 			}
 			else if("getMessages".equals(action)){
 				getMessageStuff(request,response);
-				return;
+				
 			}
-			RequestHandler handler = new HandlerFactory(personService).getHandler(action); // 
+			else{RequestHandler handler = new HandlerFactory(personService).getHandler(action); // 
 			String destination = handler.handleRequest(request, response);
 			if(destination.contains(".jsp")){
 				RequestDispatcher view = request.getRequestDispatcher(destination);
@@ -71,6 +71,7 @@ public class Controller extends HttpServlet {
 				response.getWriter().write(destination);
 			}
 
+			}
 		} catch (Exception ex) {
 			throw new ServletException(ex.getMessage(), ex);
 		}
@@ -97,8 +98,12 @@ public class Controller extends HttpServlet {
 		Gson gson= new Gson();
 		List<Message>messages = null;
 		try{
-			Person user =  (Person) request.getSession().getAttribute("name");
-			messages= user.getMessages();
+			Person user =  (Person) request.getSession().getAttribute("name"); 
+			
+			String nickName=request.getParameter("nickname"); 
+			if (nickName == null) return "{\"messages\":\"\"}"; 
+			Person friend= personService.getPerson(nickName);
+			messages= user.getMessagesTo(friend);
 
 		}catch(NullPointerException ex){
 
@@ -110,7 +115,6 @@ public class Controller extends HttpServlet {
 	public void messageStuff(HttpServletRequest request, HttpServletResponse response){
 
 		String message = request.getParameter("message");
-		Message bericht= new Message(message);
 		String nickname=request.getParameter("nickname");
 		Person user=null;
 		try{
@@ -119,9 +123,10 @@ public class Controller extends HttpServlet {
 
 		}
 		Person friend= personService.getPerson(nickname);
+		message=user.getNickName()+": "+message;
+		Message bericht= new Message(message, friend,user);
 		user.addMessage(bericht);
 		friend.addMessage(bericht);
-
 		response.setContentType("text/plain");
 		PrintWriter out = null;
 		try {

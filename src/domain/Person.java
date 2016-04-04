@@ -6,7 +6,7 @@ import java.util.List;
 public class Person {
 	
 	private transient List<Person> friends;
-	private List<Message>messages;
+	private transient List<Message>messages;
 	private String nickName;
 	private String password;
 	private String status;
@@ -67,5 +67,34 @@ public class Person {
 	
 	public List<Message> getMessages() {
 		return messages;
+	}
+
+	public List<Message> getMessagesTo(Person user) {
+		List<Message> allMessages = getMessages();
+		ArrayList<Message> relevantMessages = new ArrayList<>();
+		
+		for(Message m : allMessages) { 
+			if (m.getTarget().equals(user) || m.getSender().equals(user))
+				relevantMessages.add(m);
+		}
+		
+		return relevantMessages;
+	}
+	
+	public String toStringMessages() {
+		String text="";
+		for(Message m : messages){
+			text+=m.getMessage()+" \t";
+			
+		}
+		return text;
+	}
+	public String toStringMessages(List<Message> messages) {
+		String text="";
+		for(Message m : messages){
+			text+=m.getMessage()+" \t";
+			
+		}
+		return text;
 	}
 }
