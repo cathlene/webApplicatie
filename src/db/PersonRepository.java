@@ -2,7 +2,6 @@ package db;
 
 import java.util.List;
 
-import domain.Friend;
 import domain.Message;
 import domain.Person;
 

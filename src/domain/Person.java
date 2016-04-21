@@ -27,6 +27,13 @@ public class Person {
 		return this.password;
 	}
 	
+	public boolean isWrightPassword(String password){
+		
+ 		if(!this.password.equals(password)){
+			throw new IllegalArgumentException("invalid password");
+		}
+		return true;
+	}
 	public String getNickName(){
 		return this.nickName;
 	}

@@ -51,7 +51,7 @@ public class Controller extends HttpServlet {
 	}
 	protected void proccesRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			String action = request.getParameter("action"); // Parameter bestaat ni wss :p jawel jawel ik gebruikte da daarvoor al
+			String action = request.getParameter("action"); 
 			if (action == null) return; 
 			if("message".equals(action)){ 
 				messageStuff(request,response); 

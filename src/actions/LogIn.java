@@ -31,6 +31,8 @@ public class LogIn implements RequestHandler {
 			error.add(ex.getMessage());
 		}
 		try{
+			personService.getPerson(nickName).isWrightPassword(password);
+
 			person.setPassword(password);
 			request.setAttribute("password", password);
 		}catch(IllegalArgumentException ex){

@@ -54,10 +54,10 @@ function createFriendTable(){
 
 }
 
-function showMessage(event){
+function showMessage(event){ // wanneer er op de knop messages wordt gedrukt, krijg je de id vd knop mee via event. Dit heb je nodig voor het message verkeer te regelen, je wil weten wie de target is
 	var idhouder=event.target.id;
 	document.getElementById("wrapper").style.display="inline-block";
-	window.idhouder= idhouder;
+	window.idhouder= idhouder; // maak de locale variablen globaal zoda ik er in mijn chat.js ook aankan
 	start();
 }
 
