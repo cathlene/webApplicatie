@@ -32,4 +32,17 @@ public class PersonService {
 	public List<Person> getAllFriends(){
 		return this.personRepository.getAllPersons();
 	}
+
+	public boolean hasNewMessages(boolean nieuw) {
+		return this.personRepository.hasNewMessages(nieuw);		
+	}
+	public int getAantalAway(){
+		return this.personRepository.getAantalAway();
+	}
+	public int getAantalOnline(){
+		return this.personRepository.getAantalOnline();
+	}
+	public int getAantalOffline(){
+		return this.personRepository.getAantalOffline();
+	}
 }

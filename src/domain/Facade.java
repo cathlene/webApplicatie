@@ -33,6 +33,9 @@ public class Facade {
 		
 	}
 
+	public boolean hasNewMessage(boolean nieuw){
+		return this.service.hasNewMessages(nieuw);
+	}
 	public Person getPerson(String nickName) {
 		return this.service.getPerson(nickName);
 	}

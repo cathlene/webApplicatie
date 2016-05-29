@@ -24,11 +24,9 @@ public class AddFriend implements RequestHandler {
 			throws ServletException, IOException {
 		if (!isLoggedIn(request)) {
 			System.out.println("niet ingelogd");
-
-			JOptionPane.showMessageDialog(null, "U moet zich eerst inloggen alvores u vrienden kan toevoegen");
 			return "index.jsp";
 		}
-		String nickName=request.getParameter("nickName");
+		String nickName=request.getParameter("nickName"); // nickname komt van post 
 		Person friend= service.getPerson(nickName);
 		Person user = (Person) request.getSession().getAttribute("name");
 		user.addFriend(friend);

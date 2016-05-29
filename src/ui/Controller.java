@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
@@ -50,16 +51,11 @@ public class Controller extends HttpServlet {
 		this.proccesRequest(request, response);
 	}
 	protected void proccesRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		try {
-			String action = request.getParameter("action"); 
-			if (action == null) return; 
-			if("message".equals(action)){ 
-				messageStuff(request,response); 
-			
-			}
-			else if("getMessages".equals(action)){
-				getMessageStuff(request,response);
-				
+			String action = request.getParameter("action");
+			if("hasNewMessage".equals(action)){
+				hasNewMessages(request,response);	
 			}
 			else{RequestHandler handler = new HandlerFactory(personService).getHandler(action); // 
 			String destination = handler.handleRequest(request, response);
@@ -76,69 +72,28 @@ public class Controller extends HttpServlet {
 			throw new ServletException(ex.getMessage(), ex);
 		}
 
-
-
 	}
 
-	private void getMessageStuff(HttpServletRequest request, HttpServletResponse response) {
 
-		String result = createResult(request, response);
-		response.setContentType("text/json");
-		try {
-			response.getWriter().write(result);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-
-	}
-	public String createResult(HttpServletRequest request, HttpServletResponse response){
-
+	private void hasNewMessages(HttpServletRequest request, HttpServletResponse response) {
+		
+		Person user =  (Person) request.getSession().getAttribute("name");
+		String nickName=request.getParameter("nickname"); 
+		Person friend= personService.getPerson(nickName);
+		boolean newMessage= user.hasNewMessage();
+		
 		Gson gson= new Gson();
-		List<Message>messages = null;
-		try{
-			Person user =  (Person) request.getSession().getAttribute("name"); 
-			
-			String nickName=request.getParameter("nickname"); 
-			if (nickName == null) return "{\"messages\":\"\"}"; 
-			Person friend= personService.getPerson(nickName);
-			messages= user.getMessagesTo(friend);
 
-		}catch(NullPointerException ex){
-
-		}
-		String json = gson.toJson(messages);
-		return "{\"messages\":" + json + "}";
+		String json = gson.toJson(newMessage);
+		String user2= gson.toJson(user);
+		
+		 response.setContentType("text/json");
+			try { 
+				response.getWriter().write( "{\"newMessage\":" + json + ",\"user\":"+user2+"}");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
 	}
-
-	public void messageStuff(HttpServletRequest request, HttpServletResponse response){
-
-		String message = request.getParameter("message");
-		String nickname=request.getParameter("nickname");
-		Person user=null;
-		try{
-			user = (Person) request.getSession().getAttribute("name");
-		}catch(NullPointerException ex){
-
-		}
-		Person friend= personService.getPerson(nickname);
-		message=user.getNickName()+": "+message;
-		Message bericht= new Message(message, friend,user);
-		user.addMessage(bericht);
-		friend.addMessage(bericht);
-		response.setContentType("text/plain");
-		PrintWriter out = null;
-		try {
-			out = response.getWriter();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		out.println("" + message + "");
-		out.flush();
-		out.close();
-
-	}
-
 }

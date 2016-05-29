@@ -15,9 +15,17 @@ public class PersonRepositoryStub implements PersonRepository {
 	 public PersonRepositoryStub() {
 		persons = new HashMap<String, Person>();
 		messages= new ArrayList<Message>();
-		this.addPerson(new Person("john","john","online"));
-		this.addPerson(new Person("johnny", "johnny", "offline"));
-		this.addPerson(new Person("jes", "jes", "offline"));
+		Person person1 =new Person("john","john","online");
+		Person person2 =new Person("johnny", "johnny", "offline");
+		Person person3 =new Person("jes", "jes", "offline");
+			
+		this.addPerson(person1);
+		this.addPerson(person2);
+		this.addPerson(person3);
+		person1.setNewMessage(false);
+		person2.setNewMessage(false);
+		person3.setNewMessage(false);
+		
 
 	}
 	@Override
@@ -70,5 +78,44 @@ public class PersonRepositoryStub implements PersonRepository {
 		return new ArrayList<Person>(persons.values());
 
 	}
+	@Override
+	public boolean hasNewMessages(boolean nieuw) {
+		return true;
+	}
+	@Override
+	public int getAantalOffline(){
+		
+		int counter=0;
+		for(Person person : this.getAllPersons()){
+			if(person.getStatus().equals("offline")){
+				counter++;
+			}
+		}
+		return counter;
+	}
+	
+	@Override
+	public int getAantalOnline(){
+		
+		int counter=0;
+		for(Person person : this.getAllPersons()){
+			if(person.getStatus().equals("online")){
+				counter++;
+			}
+		}
+		return counter;
+	}
+	
+	@Override
+	public int getAantalAway(){
+	
+	int counter=0;
+	for(Person person : this.getAllPersons()){
+		if(person.getStatus().equals("away")){
+			counter++;
+		}
+	}
+	return counter;
+}
 
 }

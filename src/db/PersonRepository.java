@@ -14,4 +14,10 @@ public interface PersonRepository {
 	List<Person> getAllPersons();
 	void addMessage(Message message);
 	List<Message> getMessages();
+	boolean hasNewMessages(boolean nieuw);
+	int getAantalAway();
+	int getAantalOnline();
+	int getAantalOffline();
+
+	
 }

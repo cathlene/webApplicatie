@@ -10,6 +10,7 @@ public class Person {
 	private String nickName;
 	private String password;
 	private String status;
+	private boolean newMessage;
 	public Person(){
 		
 	}
@@ -54,7 +55,7 @@ public class Person {
 		
 	}
 	public void setNickName(String nickName) {
-		if (nickName.isEmpty()) {
+		if (nickName==null || nickName.isEmpty()) {
 			throw new IllegalArgumentException("No nickName given");
 		}
 		this.nickName = nickName;
@@ -87,6 +88,9 @@ public class Person {
 		
 		return relevantMessages;
 	}
+	public boolean hasNewMessage(){
+		return newMessage;
+	}
 	
 	public String toStringMessages() {
 		String text="";
@@ -103,5 +107,9 @@ public class Person {
 			
 		}
 		return text;
+	}
+
+	public void setNewMessage(boolean b) {
+		 this.newMessage=b;
 	}
 }

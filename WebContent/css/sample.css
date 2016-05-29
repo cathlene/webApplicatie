@@ -193,7 +193,13 @@ input[id="votes"] {
     width:80%;
     border:1px solid #ACD8F0;
     overflow:auto; }
-  
+ #status{
+ width: 50;
+ height: 30;
+ }
+.hasMessages {
+	background-color: red;
+}
 #usermsg {
     width:75%;
     border:1px solid #ACD8F0;

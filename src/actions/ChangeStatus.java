@@ -16,7 +16,7 @@ public class ChangeStatus implements RequestHandler {
 		
 		Person user= (Person) request.getSession().getAttribute("name");
 		user.setStatus(request.getParameter("status"));
-		return "index.jsp";
+		return "iets"; // je mag hier eender wat schrijven
 	}
 
 }

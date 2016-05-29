@@ -6,7 +6,10 @@ var COMPLETE = 4;
 
 function addNewFriend(){
 	var nickName = document.getElementById("nickName").value;
-	var status = document.getElementById("status").value;
+	var status=document.getElementById("status").value;
+	if(0===status.length){
+		status=document.getElementById("statusSelect").value
+	}
 	postObject.open("POST", "Controller?action=addNewFriend", true);
 	postObject.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	postObject.send("nickName="+nickName+"&status="+status);
@@ -21,6 +24,13 @@ function changeStatus(){
 	postObject.send("status="+status);
 
 }
+function changeStatusSelect(){
+	var status= document.getElementById("statusSelect").value;
+	postObject.open("POST", "Controller?action=changeStatus", true);
+	postObject.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	postObject.send("status="+status);
+
+}
 function loadFriends(){
 	getObject.open("GET","Controller?action=overviewFriends",true);
 	getObject.onreadystatechange=createFriendTable;
@@ -28,27 +38,28 @@ function loadFriends(){
 }
 
 function createFriendTable(){
-
-	if (getObject.status == OK) {
+		if (getObject.status == OK) {
 		if (getObject.readyState == COMPLETE) {
-
 			var serverResponse = JSON.parse(getObject.responseText);
 			var friends= serverResponse.friends;
-			var toReturn = "<tr><th>nickname</th><th>status</th></tr>";
+			var tableFriends = document.getElementById("tableFriends");
+			var toReturn = tableFriends.innerHTML || "<tr><th>nickname</th><th>status</th></tr>";
 			for(var i in friends){
-				toReturn += "<tr><td id="+friends[i].nickName+">"+ 
+				if (document.getElementById(friends[i].nickName))
+					continue; // Friend bestaat al, hoeft niet opnieuw aangemaakt te worden
+				//toReturn += "<tr><td id="+friends[i].nickName+">"+ 
+				toReturn += "<tr><td>"+ 
 				friends[i].nickName +
 				"</td><td>" +
 				friends[i].status +
 				"</td><td>"+
-				"<button  id="+friends[i].nickName+" onclick=showMessage(event)>messages</button>" +
+				"<button class=messageButton id="+friends[i].nickName+" onclick=showMessage(event)>messages</button>" +
 				"</td><td></tr>"; 
 
 			}
-			var tableFriends = document.getElementById("tableFriends");
 			if (tableFriends)
 				tableFriends.innerHTML = toReturn;
-			setTimeout("loadFriends()", 10000);
+			setTimeout("loadFriends()", 1000);
 		}}
 
 

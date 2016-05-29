@@ -16,7 +16,11 @@ public class HandlerFactory {
 		handlers.put("logIn", new LogIn(personService));	
 		handlers.put("logOut", new LogOut());	
 		handlers.put("changeStatus", new ChangeStatus());
+		handlers.put("getStatus", new Status(personService));
+		handlers.put("message", new Messages(personService));
+		handlers.put("getMessages", new GetMessages(personService));
 
+		
 	}
 	
 	public RequestHandler getHandler(String action){
